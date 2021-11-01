@@ -1,0 +1,256 @@
+1）char->%c;%*c(此次读取被忽略)；
+
+2）__builtin_popcount()//返回数据中，二进制中1的个数
+
+3）strlen()//字符串长度
+
+4）int vector:
+ (1)头文件#include<vector>.
+
+ (2)创建vector对象，vector<int> vec;
+
+ (3)尾部插入数字：vec.push_back(a);
+
+ (4)使用下标访问元素，cout<<vec[0]<<endl;记住下标是从0开始的。
+ https://blog.csdn.net/msdnwolaile/article/details/52708144
+
+ (5)vec.back()取数组的最后一个
+
+ (6)最大值最小值：(min)max_element(v.begin(),v.end())//返回迭代器(下标)
+  取值：*max_element(); 
+
+5）set:
+ begin();            // 返回指向第一个元素的迭代器
+ end();              // 返回指向迭代器的最末尾处（即最后一个元素的下一个位置）
+ clear();            // 清除所有元素
+ count();            // 返回某个值元素的个数
+ 
+ empty();            // 如果集合为空，返回true
+ 
+ equal_range();      //返回集合中与给定值相等的上下限的两个迭代器
+ 
+ erase()–删除集合中的元素
+ 
+ find()–返回一个指向被查找到元素的迭代器
+ 
+ get_allocator()–返回集合的分配器
+ 
+ insert()–在集合中插入元素
+ 
+ lower_bound()–返回指向大于（或等于）某值的第一个元素的迭代器
+ 
+ key_comp()–返回一个用于元素间值比较的函数
+ 
+ max_size()–返回集合能容纳的元素的最大限值
+ 
+ rbegin()–返回指向集合中最后一个元素的反向迭代器
+ 
+ rend()–返回指向集合中第一个元素的反向迭代器
+ 
+ size()–集合中元素的数目
+ 
+ swap()–交换两个集合变量
+ 
+ upper_bound()–返回大于某个值元素的迭代器
+ 
+ value_comp()–返回一个用于比较元素间的值的函数
+
+6）next_permutation() 什么意思呢？就是一个求一个排序的下一个排列的函数，可以遍历全排列
+
+ 与之完全相反的函数还有prev_permutation（就是一个求一个排序的上一个排列的函数）
+
+7)priority_queue优先队列
+ priority_queue<int>q;
+ 从小到大：
+ priority_queue<int,vector<int>,greater<int> >q;
+
+ 如果你想从大到小的话可以重载运算符：
+ struct Node{
+	int x,y;
+	Node(int a=0, int b=0):
+		x(a), y(b) {}
+ };
+ struct cmp{
+	bool operator()(Node a, Node b){
+		if(a.x == b.x)	return a.y>b.y;
+		return a.x>b.x;
+	}
+ };
+ priority_queue<Node,vector<Node>,cmp>q;
+
+ 或者你也可以用less
+ priority_queue<int,vector<int>,less<int> >q;
+
+ 1.优先队列的常用操作
+
+        q.empty()          如果队列为空，则返回true，否则返回false
+
+        q.size()           返回队列中元素的个数
+
+        q.pop()            删除队首元素，但不返回其值
+
+        q.top()            返回具有最高优先级的元素值，但不删除该元素
+
+        q.push(item)       在基于优先级的适当位置插入新元素
+
+8)qsort(*s, n, sizeof(s[0]), cmp);
+ 
+ 其中第一个参数s是一个地址，即参与排序的首地址；
+ n是需要排序的数量；
+ sizeof(s[0])则是每一个元素占用的空间大小；
+ 指向函数的指针，用于确定排序的顺序。
+
+ 简单的说：对一个长为1000的数组进行排序时，int a[1000]; 
+ qsort(a, 1000, sizeof(int), cmp);
+ //其中cmp函数应写为：
+ int cmp(const void *a, const void *b)
+ {
+    return *(int*)a - *(int*)b; //由小到大排序
+    //return *(int *)b - *(int *)a; 由大到小排序
+ }
+ cmp函数的返回值，<0(不进行置换)，>0(进行置换)，0(不进行置换)。
+
+9)sort(start,least,cmp)
+ Sort函数有三个参数：（第三个参数可不写）
+
+ （1）第一个是要排序的数组的起始地址。
+ 
+ （2）第二个是结束的地址（最后一位要排序的地址）
+ 
+ （3）第三个参数是排序的方法，可以是从大到小也可是从小到大，还可以不写第三个参数，此时默认的排序方法是从小到大排序。
+ bool compare(int a,int b)
+ {
+ return a<b; //默认的升序排列，如果改为return a>b，则为降序
+ }
+
+10)string substr (size_t pos = 0, size_t len = npos) const;
+ 产生子串
+ 返回一个新建的 初始化为string对象的子串的拷贝string对象。
+  格式1： substr(string string, int a, int b);
+  格式2：substr(string string, int a) ;
+
+  格式1：
+  1、string 需要截取的字符串
+
+  2、a 截取字符串的开始位置（注：当a等于0或1时，都是从第一位开始截取）
+
+  3、b 要截取的字符串的长度
+
+  格式2：
+
+  1、string 需要截取的字符串
+
+  2、a 可以理解为从第a个字符开始截取后面所有的字符串。
+
+
+ 子串是，在字符位置pos开始，跨越len个字符（或直到字符串的结尾，以先到者为准）对象的部分。
+11)平方、开方、绝对值
+ //平方 pow()
+ int a = pow(4,2);// 4的平方=16
+ //开方
+ int b = pow(4,0.5);// 4的平方根=2
+ int c = sqrt(4);// 4的平方根=2
+ //整数绝对值
+ int c = abs(b-c);
+ //浮点数绝对值
+ double d = fabs(b-c);
+
+12)sql:
+ 1.窗口函数：
+  1）rank函数：这个例子中是5位，5位，5位，8位，也就是如果有并列名次的行，会占用下一名次的位置。比如正常排名是1，2，3，4，但是现在前3名是并列的名次，结果是：1，1，1，4。
+
+  2）dense_rank函数：这个例子中是5位，5位，5位，6位，也就是如果有并列名次的行，不占用下一名次的位置。比如正常排名是1，2，3，4，但是现在前3名是并列的名次，结果是：1，1，1，2。
+
+  3）row_number函数：这个例子中是5位，6位，7位，8位，也就是不考虑并列名次的情况。比如前3名是并列的名次，排名是正常的1，2，3，4。
+
+  =	等于
+  <>	不等于
+  >	大于
+  <	小于
+  >=	大于等于
+  <=	小于等于
+  BETWEEN	在某个范围内
+  LIKE	搜索某种模式
+
+   4)join
+   C:\Users\23173\Desktop\VS code\.vscode
+
+   5)COALESCE
+   Example
+    Return the first non-null value in a list:
+
+    SELECT COALESCE(NULL, 1, 2, 'W3Schools.com');
+
+
+13)map
+ 元素存取
+ operator[]：存取指定的[i]元素的資料
+ 迭代器
+ begin()：回傳指向map頭部元素的迭代器
+ end()：回傳指向map末尾的迭代器
+ rbegin()：回傳一個指向map尾部的反向迭代器
+ rend()：回傳一個指向map頭部的反向迭代器
+ 容量
+ empty()：檢查容器是否為空，空則回傳true
+ size()：回傳元素數量
+ max_size()：回傳可以容納的最大元素個數
+ 修改器
+ clear()：刪除所有元素
+ insert()：插入元素
+ erase()：刪除一個元素
+ swap()：交換兩個map
+ 查找
+ count()：回傳指定元素出現的次數
+ find()：查找一個元素
+
+13)to_string
+
+     包含在# include<string>。作用是把数值类型如int、double、long等转化为string，详细可参考博客：https://blog.csdn.net/lzuacm/article/details/52704931
+
+ int a = 4;
+ double b = 3.14;
+ string str1, str2;
+ str1 = to_string(a);
+ str2 = to_string(b);
+ cout << str1 << endl;
+ cout << str2 << endl;
+
+14)stoi和atoi
+
+           包含在#include<string>，不是c++11的可以在#include<cstring>。作用是将字符串转化为int型。区别是stoi的形参是const string*，而atoi的形参是const char*。c_str()的作用是将const string*转化为const char*。
+
+ string s1("1234567");
+ char* s2 = "1234567";
+ int a = stoi(s1);
+ int b = atoi(s2);
+ int c = atoi(s1.c_str());
+ cout << a << endl;
+ cout << b << endl;
+ cout << c << endl;
+
+15)string增删改查
+  插入字符串
+  insert() 函数可以在 string 字符串中指定的位置插入另一个字符串，它的一种原型为：
+  string& insert (size_t pos, const string& str);
+  pos 表示要插入的位置，也就是下标；str 表示要插入的字符串，它可以是 string 变量，也可以是C风格的字符串。
+  
+  erase() 函数可以删除 string 变量中的一个子字符串。它的一种原型为：
+  string& erase (size_t pos = 0, size_t len = npos);
+  pos 表示要删除的子字符串的起始下标，len 表示要删除子字符串的长度。如果不指明 len 的话，那么直接删除从 pos 到字符串结束处的所有字符（此时 len = str.length - pos）。
+          
+  提取子字符串
+  substr() 函数用于从 string 字符串中提取子字符串，它的原型为：
+  string substr (size_t pos = 0, size_t len = npos) const;
+  pos 为要提取的子字符串的起始下标，len 为要提取的子字符串的长度。
+  
+  字符串查找
+  string 类提供了几个与字符串查找有关的函数，如下所示。
+  find() 函数
+  find() 函数用于在 string 字符串中查找子字符串出现的位置，它其中的两种原型为：
+  size_t find (const string& str, size_t pos = 0) const;
+  size_t find (const char* s, size_t pos = 0) const;
+  第一个参数为待查找的子字符串，它可以是 string 变量，也可以是C风格的字符串。第二个参数为开始查找的位置（下标）；如果不指明，则从第0个字符开始查找。
+  
+  替换：str1.replace(pos,len,str2)
+  
+   反转：reverse(s.begin(),s.end())
