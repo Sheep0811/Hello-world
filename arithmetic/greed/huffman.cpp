@@ -43,7 +43,7 @@ vector<HNode> HuffmanTree(int n)
         tree[i].lchild = -1;
         tree[i].rchild = -1;
     }
-    cout << "请分别输入" << n << "个节点的标识和权值(以空格隔开):" << endl;
+    cout << "请分别输入" << n << "个字符及其权值(以空格隔开):" << endl;
     for (int i = 0; i < n; i++)
     {
         cin >> tree[i].sign >> tree[i].weight;
@@ -129,4 +129,4 @@ int main()
     PrintHuffmanCode(codes);
     system("pause");
     return 0;
-}
+} 
