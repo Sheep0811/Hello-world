@@ -105,13 +105,13 @@ void setting(vector<int> &Person, int n) //生成随机数
     srand(time(NULL)); //通过时间给srand()提供一个种子
     for (int i = 0; i < n; i++)
     {
-        Person[i] = rand() % 1000;
+        Person[i] = rand() % 100000;
         //调用rand()，它会根据提供给srand()的种子值返回一个随机数
     }
-   cout << "\n随机生成的" << n << "个数为:";
-    for (int i = 0; i < n; i++)
-    {
-         cout << Person[i] << " ";
-   }
+   //cout << "\n随机生成的" << n << "个数为:";
+  //  for (int i = 0; i < n; i++)
+  //  {
+  //       cout << Person[i] << " ";
+  // }
 }
 

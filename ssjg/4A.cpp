@@ -5,8 +5,7 @@
 #include<cstring>
 using namespace std;
 
-struct HTNode
-{
+struct HTNode{
     int weight;
     char value;
     int LeftC;
@@ -24,33 +23,34 @@ bool ZIPCODE[1000000];
 
 char REZIPCODE[1000000];
 
-int counter(string tempstring)//Í³¼ÆÈ¨ÖØ
+int counter(string tempstring)//ç»Ÿè®¡æƒé‡
 {
-    int length=0;//´ÓÍ·¿ªÊ¼
+    int length=0;//ä»å¤´å¼€å§‹
     int j= 0;
-    for(int i = 0;i<tempstring.length();i++)//¶Ô×Ö·û´®½øĞĞ±éÀú²Ù×÷
+    int n=tempstring.size();
+    for(int i = 0;i<n;i++)//å¯¹å­—ç¬¦ä¸²è¿›è¡Œéå†æ“ä½œ
 	{
-        for(j = 0;j<length;j++) //¶Ô×Ö·û½øĞĞÊÇ·ñĞÂ½¨ÅĞ¶Ï
+        for(j = 0;j<length;j++) //å¯¹å­—ç¬¦è¿›è¡Œæ˜¯å¦æ–°å»ºåˆ¤æ–­
 		{
             if(HTree[j].value == tempstring[i]) break;
         }
         if(j!=length)
 		{
-            HTree[j].weight++;//·ÇĞÂ³öÏÖ Ô­È¨ÖØ×Ô¼Ó
+            HTree[j].weight++;//éæ–°å‡ºç° åŸæƒé‡è‡ªåŠ 
         }
         else
 		{
-            length++;//ĞÂ³öÏÖ À©Õ¹Éú³ÉĞÂ½Úµã
+            length++;//æ–°å‡ºç° æ‰©å±•ç”Ÿæˆæ–°èŠ‚ç‚¹
             HTree[j].weight++;
             HTree[j].value = tempstring[i];
             HTree[j].ID = length;
         }
 
     }
-    return length;//·µ»ØÊıÁ¿
+    return length;//è¿”å›æ•°é‡
 }
 
-void Sort_1(int la,int ra)//°´È¨ÖØ´ÓĞ¡µ½´óÅÅĞò
+void Sort_1(int la,int ra)//æŒ‰æƒé‡ä»å°åˆ°å¤§æ’åº
 {
     if(la>=ra) return ;
     int r = ra;
@@ -78,7 +78,7 @@ void Sort_1(int la,int ra)//°´È¨ÖØ´ÓĞ¡µ½´óÅÅĞò
     return ;
 }
 
-void Sort_2(int la,int ra)//¶ÔID½øĞĞÅÅĞò
+void Sort_2(int la,int ra)//å¯¹IDè¿›è¡Œæ’åº
 {
     if(la>=ra) return ;
     int r = ra;
@@ -106,9 +106,9 @@ void Sort_2(int la,int ra)//¶ÔID½øĞĞÅÅĞò
     return ;
 }
 
-int HTree_Bulid(int length)//½¨Ê÷
+int HTree_Bulid(int length)//å»ºæ ‘
 {
-    cout<<"Í³¼ÆÈ¨ÖØ£º"<<endl;
+    cout<<"ç»Ÿè®¡æƒé‡ï¼š"<<endl;
     for(int i=0;i<length;i++)
 	{
     cout<<HTree[i].value<<" "<<HTree[i].weight<<endl;
@@ -117,16 +117,16 @@ int HTree_Bulid(int length)//½¨Ê÷
     int head,last;
     head = 0;
     last = length;
-    while(last-1>head) //ºóÊ÷½Úµã½¨Á¢
+    while(last-1>head) //åæ ‘èŠ‚ç‚¹å»ºç«‹
 	{                                              
-        HTree[last].weight = HTree[head].weight+HTree[head+1].weight;//¸¸½ÚµãÈ¨ÖØÎª×Ó½ÚµãÈ¨ÖØÖ®ºÍ
-        HTree[last].ID = last+1;//¸¸½Úµã±àºÅ
-        HTree[head].Parent = HTree[head+1].Parent = last+1;//×Ó½ÚµãµÄ¸¸ÏÂ±êÊôĞÔ
-        HTree[last].LeftC = HTree[head].ID;//¸¸½Úµã×óÓÒ×ÓÏÂ±ê
+        HTree[last].weight = HTree[head].weight+HTree[head+1].weight;//çˆ¶èŠ‚ç‚¹æƒé‡ä¸ºå­èŠ‚ç‚¹æƒé‡ä¹‹å’Œ
+        HTree[last].ID = last+1;//çˆ¶èŠ‚ç‚¹ç¼–å·
+        HTree[head].Parent = HTree[head+1].Parent = last+1;//å­èŠ‚ç‚¹çš„çˆ¶ä¸‹æ ‡å±æ€§
+        HTree[last].LeftC = HTree[head].ID;//çˆ¶èŠ‚ç‚¹å·¦å³å­ä¸‹æ ‡
         HTree[last].RightC = HTree[head+1].ID;
         int i;
-        HTNode HTemp = HTree[last];//½«ĞÂ½¨Á¢½Úµã¶ÓÈ¨ÖØÅÅĞò
-        for(i=last-1;i>head+2&&HTree[i].weight>HTree[last].weight;i--)//²åÈë
+        HTNode HTemp = HTree[last];//å°†æ–°å»ºç«‹èŠ‚ç‚¹é˜Ÿæƒé‡æ’åº
+        for(i=last-1;i>head+2&&HTree[i].weight>HTree[last].weight;i--)//æ’å…¥
 		{
             HTree[i+1] = HTree[i];
         }
@@ -135,43 +135,43 @@ int HTree_Bulid(int length)//½¨Ê÷
         head+=2;
         last++;
     }
-    Sort_2(0,last-1);//¶ÔID½øĞĞÅÅĞò
-    cout<<"Ê÷ĞÎ½ÚµãÖµ£º"<<endl;
+    Sort_2(0,last-1);//å¯¹IDè¿›è¡Œæ’åº
+    cout<<"æ ‘å½¢èŠ‚ç‚¹å€¼ï¼š"<<endl;
     for(int i=0;i<last;i++)
 	{
         cout<<HTree[i].ID<<" "<<HTree[i].weight<<" "<<HTree[i].Parent<<" "<<HTree[i].LeftC<<" "<<HTree[i].RightC<<endl;
     }
-    return last;//·µ»Ø×îÖÕ½ÚµãÊ÷´óĞ¡
+    return last;//è¿”å›æœ€ç»ˆèŠ‚ç‚¹æ ‘å¤§å°
 }
 
 void CODE(int length,char TempC[],int node,FILE *HTreeCode)
 {
-    if(!HTree[node].LeftC) //µ±µ½´ïÒ¶×Ó½Úµã£¨½öÒ¶×Ó½ÚµãµÄº¢×ÓIDÎª0£©
+    if(!HTree[node].LeftC) //å½“åˆ°è¾¾å¶å­èŠ‚ç‚¹ï¼ˆä»…å¶å­èŠ‚ç‚¹çš„å­©å­IDä¸º0ï¼‰
 	{
-        fprintf(HTreeCode,"%c: ",HTree[node].value);//×Ö·ûÖµĞ´ÈëÎÄ¼ş
+        fprintf(HTreeCode,"%c: ",HTree[node].value);//å­—ç¬¦å€¼å†™å…¥æ–‡ä»¶
         for(int i = 0;i<length;i++)
 		{
-            HTree[node].code[i] = TempC[i]; //»ñÈ¡Â·¾¶±àÂë
-            fprintf(HTreeCode,"%c",HTree[node].code[i]);//Ğ´ÈëÎÄ¼ş
+            HTree[node].code[i] = TempC[i]; //è·å–è·¯å¾„ç¼–ç 
+            fprintf(HTreeCode,"%c",HTree[node].code[i]);//å†™å…¥æ–‡ä»¶
         }
         fprintf(HTreeCode,"\n");
         HTree[node].code[length]='\0';
         cout<<HTree[node].value<<" "<<HTree[node].code<<endl;
-        int l=0;
         return ;
     }
     length++;
-    TempC[length-1] = '0';//·ÇÒ¶×Ó ×ó×ÓÂ·¾¶Îª0
+    TempC[length-1] = '0';//éå¶å­ å·¦å­è·¯å¾„ä¸º0
     CODE(length,TempC,HTree[node].LeftC-1,HTreeCode);
-    TempC[length-1] = '1';//ÓÒ×ÓÂ·¾¶Îª1
+    TempC[length-1] = '1';//å³å­è·¯å¾„ä¸º1
     CODE(length,TempC,HTree[node].RightC-1,HTreeCode);
     return ;
 }
 
-int RAR(string temp)//Ñ¹ËõÎÄ¼şÇ°4×Ö·û±£´æ³¤¶È ºó±£´æÑ¹ËõÂë
+int RAR(string temp)//å‹ç¼©æ–‡ä»¶å‰4å­—ç¬¦ä¿å­˜é•¿åº¦ åä¿å­˜å‹ç¼©ç 
 {
     int end_ = 0;
-    for(int i=0;i<temp.length();i++)
+    int n=temp.size();
+    for(int i=0;i<n;i++)
 	{
         int j=0;
         for(j=0;HTree[j].value!=temp[i];j++);
@@ -184,17 +184,17 @@ int RAR(string temp)//Ñ¹ËõÎÄ¼şÇ°4×Ö·û±£´æ³¤¶È ºó±£´æÑ¹ËõÂë
     return end_;
 }
 
-char RENode(int *l,int node) //¶ÔÃ¿¸öÒ¶×Ó½ÚµãÆ¥Åä
+char RENode(int *l,int node) //å¯¹æ¯ä¸ªå¶å­èŠ‚ç‚¹åŒ¹é…
 {
     int k = *l;
     int b = 0;
     while(1){
-        if(HTree[node].code[b]==0)//µ±ÍêÈ«Æ¥ÅäÊ±
+        if(HTree[node].code[b]==0)//å½“å®Œå…¨åŒ¹é…æ—¶
         {
-            *l+=b;//ĞŞ¸ÄÒÑ·­Òë³¤¶È
-            return HTree[node].value;//·µ»Ø·­ÒëÂë
+            *l+=b;//ä¿®æ”¹å·²ç¿»è¯‘é•¿åº¦
+            return HTree[node].value;//è¿”å›ç¿»è¯‘ç 
         }
-        if(HTree[node].code[b]-'0'!=REZIPCODE[k]-'0') //µ±²»Æ¥ÅäÊ±·µ»Ø
+        if(HTree[node].code[b]-'0'!=REZIPCODE[k]-'0') //å½“ä¸åŒ¹é…æ—¶è¿”å›
         {
             return 0;
         }
@@ -205,31 +205,31 @@ char RENode(int *l,int node) //¶ÔÃ¿¸öÒ¶×Ó½ÚµãÆ¥Åä
 }
 
 void RERAR(int end_,char RECODE[],int length_)
-// ½«Ñ¹ËõÎÄ¼ş±í¶ÁÈ¡ Ç°4Î»Îª³¤¶È ºóÎª±àÂë
+// å°†å‹ç¼©æ–‡ä»¶è¡¨è¯»å– å‰4ä½ä¸ºé•¿åº¦ åä¸ºç¼–ç 
 {
     FILE *CodeRead = fopen("CodeFile.dat","rb");
     int sum = 0;
     char m;
-    for(int i = 0;i<3;i++){//¶ÁÈ¡³¤¶È
+    for(int i = 0;i<3;i++){//è¯»å–é•¿åº¦
         m=fgetc(CodeRead);
         if(m==0) break;
         sum*=10;
         sum+=(m-'0');
     }
-    fseek(CodeRead,4,0);//Ìø×ª
+    fseek(CodeRead,4,0);//è·³è½¬
     for(int i=0;i<sum;i++)
 	{
         fread(&REZIPCODE[i],sizeof(char),1,CodeRead);
     }
     fclose(CodeRead);
-    int k=0;//µ±Ç°·­ÒëÎ»ÏÂ±ê
-    int l=0;//µ±Ç°±àÂëÒÑ·­ÒëÎ»ÖÃ
+    int k=0;//å½“å‰ç¿»è¯‘ä½ä¸‹æ ‡
+    int l=0;//å½“å‰ç¼–ç å·²ç¿»è¯‘ä½ç½®
     int r=0;
     while(l<sum){
-        for(int i = 0;i<length_;i++) //ÔÚÒ¶×Ó½ÚµãÖĞ±éÀúÑ°ÕÒ
+        for(int i = 0;i<length_;i++) //åœ¨å¶å­èŠ‚ç‚¹ä¸­éå†å¯»æ‰¾
         {
-            char key = RENode(&l,i);//µ±Ç°·­ÒëÂë
-            if(key!=0)//Èç¹ûÓĞĞ§
+            char key = RENode(&l,i);//å½“å‰ç¿»è¯‘ç 
+            if(key!=0)//å¦‚æœæœ‰æ•ˆ
             {
                 RECODE[k] = key;
                 k++;
@@ -237,7 +237,7 @@ void RERAR(int end_,char RECODE[],int length_)
             }
         }
     }
-    RECODE[k] = '\0';//×îºóÄ©Î²Öµ
+    RECODE[k] = '\0';//æœ€åæœ«å°¾å€¼
     return ;
 }
 
@@ -273,7 +273,7 @@ void HTreeRead(int *length){
     return ;
 } 
 
-string TempRead()//¶ÁÈëÎÄ¼ş
+string TempRead()//è¯»å…¥æ–‡ä»¶
 {
     FILE *TEXTRead = fopen("File.txt","r");
     string Temp;
@@ -294,13 +294,13 @@ string TempRead()//¶ÁÈëÎÄ¼ş
 int main()
 {
     string temp;
-    cout<<"ÇëÑ¡ÔñÄ£Ê½£º \n1.´ÓFile.txtÖĞ»ñÈ¡(Ä¬ÈÏ)\n2.×ÔĞĞÊäÈë"<<endl;
+    cout<<"è¯·é€‰æ‹©æ¨¡å¼ï¼š \n1.ä»File.txtä¸­è·å–(é»˜è®¤)\n2.è‡ªè¡Œè¾“å…¥"<<endl;
     int o;
     cin>>o;
     switch (o)
 	{
         case 1:temp=TempRead();break;
-        case 2:cout<<"ÇëÊäÈë£º\n";cin>>temp;break;
+        case 2:cout<<"è¯·è¾“å…¥ï¼š\n";cin>>temp;break;
         default :cout<<"error"<<endl;temp=TempRead();break;
     }
     FILE *code = fopen("CodeFile.dat","wb");
@@ -310,13 +310,13 @@ int main()
     HTreeRead(&last);
     char TempC[20];
     FILE *HTreeCode = fopen("HufCode.txt","w");
-    cout<<"±àÂëÖµ£º"<<endl;
+    cout<<"ç¼–ç å€¼ï¼š"<<endl;
     CODE(0,TempC,last-1,HTreeCode);
     fclose(HTreeCode);
     int end_ = RAR(temp);
     fprintf(code,"%d",end_);
     fseek(code,4,0);
-    cout<<"ÎÄ¼ş±àÂëÎª:"<<endl;
+    cout<<"æ–‡ä»¶ç¼–ç ä¸º:"<<endl;
     for(int i=0;i<end_;i++)
 	{
         cout<<(int)ZIPCODE[i];
@@ -326,9 +326,8 @@ int main()
     cout<<endl;
     char RETemp[2000];
     RERAR(end_,RETemp,length);
-    cout<<"½âÑ¹ºóÎª£º"<<endl;
+    cout<<"è§£å‹åä¸ºï¼š"<<endl;
     cout<<RETemp<<endl;
     system("pause");
     return 0;
 }
-

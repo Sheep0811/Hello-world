@@ -22,16 +22,16 @@ int main()
     int n=0;
     cin>>n;
     vector<int> arr(n,0);
-   // for(int i=0;i<n;++i)
-   // {
-   //     arr[i]=i+1;
-   // }
-    cout<<"请输入数组值：\n";
     for(int i=0;i<n;++i)
     {
-        cout<<"第"<<i+1<<"个数为：";
-        cin>>arr[i];
+        arr[i]=i+1;
     }
+   // cout<<"请输入数组值：\n";
+   // for(int i=0;i<n;++i)
+   // {
+   //     cout<<"第"<<i+1<<"个数为：";
+   //     cin>>arr[i];
+   // }
     cout<<"\n请输入要查询的值：";
     int x=0;
     cin>>x;

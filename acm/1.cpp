@@ -59,7 +59,7 @@ LL Query(int l,int r,int k)
     {
         t[k*2].mark+=t[k].mark;
         t[k*2+1].mark+=t[k].mark;
-         t[k].sum+=(LL)(t[k].r-t[k].l+1)*t[k].mark;//¼ÇµÃ+1
+         t[k].sum+=(LL)(t[k].r-t[k].l+1)*t[k].mark;//ï¿½Çµï¿½+1
         t[k].mark=0;
     }
     int mid=t[k].m;

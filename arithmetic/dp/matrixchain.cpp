@@ -9,14 +9,46 @@ void printParenthesis(int s[][N] , int i, int j);//输出表达式
 
 int main()
 {
-    cout<<"请输入矩阵个数： ";
+    int x;
+    cout<<"请选择输入方式：\n1.从文件chain.txt中输入\n2.手动输入\n";
+    cin>>x;
     int n;
-    cin>>n;
-    cout<<"请输入矩阵(忽略两个矩阵间相同的值，共"<<(n+1)<<"个数）:";
-    int p[n+1];
-    for(int i=0;i<=n;++i)
+    int p[100000]={0};
+    if(x==1)
     {
-        cin>>p[i];
+        ifstream input("chain.txt");
+        if (!input)
+	    {
+		    cout << "文件不存在" << endl;
+		    cout << "退出程序" << endl;
+            system("pause");
+		    return 0;
+        }
+        input>>n;
+        cout<<"文件中读取的矩阵为(忽略两个矩阵间相同的值，共"<<(n+1)<<"个数）：";
+        for(int i=0;i<=n;++i)
+        {
+            input>>p[i];
+            cout<<p[i]<<" ";
+        }
+        cout<<endl;
+        input.close();
+    }
+    else if(x==2)
+    {
+        cout<<"请输入矩阵个数： ";
+        cin>>n;
+        cout<<"请输入矩阵(忽略两个矩阵间相同的值，共"<<(n+1)<<"个数）:";
+        for(int i=0;i<=n;++i)
+        {
+            cin>>p[i];
+        }
+    }
+    else
+    {
+        cout<<"输入错误";
+        system("pause");
+        return 0;
     }
     int m[n+1][N];
     int s[n+1][N];
@@ -33,7 +65,7 @@ int main()
         }
         cout << endl;
     }
-    cout<<"\n最少乘法次数为"<<m[1][n];
+    cout<<"\n最少乘法次数为"<<m[1][n]<<"次";
     cout<<"\n表达式为：";
     printParenthesis(s,1,n);
     cout<<endl;

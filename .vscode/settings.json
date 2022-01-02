@@ -24,6 +24,19 @@
         "xutility": "cpp",
         "ostream": "cpp",
         "vector": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "algorithm": "cpp",
+        "chrono": "cpp",
+        "limits": "cpp",
+        "random": "cpp",
+        "utility": "cpp",
+        "valarray": "cpp",
+        "atomic": "cpp",
+        "bitset": "cpp",
+        "cmath": "cpp",
+        "forward_list": "cpp",
+        "list": "cpp",
+        "numeric": "cpp",
+        "xlocbuf": "cpp"
     }, // 格式化时调整include的顺序（按字母排序）
 }

@@ -13,7 +13,7 @@ struct HNode
     int lchild;    // 左孩子id
     int rchild;    // 右孩子id
     char sign;     // 该节点标识
-    HNode() {}
+    HNode() {id=0;weight=0;parent=-1;lchild=-1;rchild=-1;sign=0;}
     HNode(int _id, double _weight, int _lchild, int _rchild) : id(_id), weight(_weight), lchild(_lchild), rchild(_rchild) {}
     // 自定义比较规则
     bool operator>(const HNode &node) const
@@ -21,6 +21,8 @@ struct HNode
         return this->weight > node.weight;
     }
 };
+        
+vector<HNode> tree;
 
 // 定义存储Huffman编码的结构体
 struct HCode
@@ -32,22 +34,6 @@ struct HCode
 // 构造Huffman树
 vector<HNode> HuffmanTree(int n)
 {
-    // 定义Huffman结点，n个字符需要构造哈夫曼树2 * n - 1
-    vector<HNode> tree(2 * n - 1);
-    // 初始化
-    for (int i = 0; i < 2 * n - 1; i++)
-    {
-        tree[i].id = i;
-        tree[i].weight = 0;
-        tree[i].parent = -1;
-        tree[i].lchild = -1;
-        tree[i].rchild = -1;
-    }
-    cout << "请分别输入" << n << "个字符及其权值(以空格隔开):" << endl;
-    for (int i = 0; i < n; i++)
-    {
-        cin >> tree[i].sign >> tree[i].weight;
-    }
     // 建立优先队列存储树的根节点的集合
     priority_queue<HNode, vector<HNode>, greater<HNode>> q;
     for (int i = 0; i < n; i++)
@@ -121,12 +107,75 @@ void PrintHuffmanCode(vector<HCode> &codes)
 
 int main()
 {
-    int n;
-    cout << "请输入要编码的字符的个数:" << endl;
-    cin >> n;
+    int n=0;
+    int x;
+    cout << "请选择输入方式：\n1.从文件huffman.txt中输入\n2.手动输入\n";
+    cin >> x;
+    if (x == 1)
+    {
+        ifstream input("huffman.txt");
+        map<char,int> map;
+        // 初始化
+        char c;
+        string str;
+        while((c=input.get())!= EOF)
+	    {
+            str+=c;
+            map[c]++;
+            if(map[c]==1)n++;
+        }
+        input.close();
+        cout<<"进行编码的字符串为:"<<str<<endl;
+        for (int i = 0; i < 2 * n - 1; i++)
+        {
+            HNode tmp;
+            tmp.id = i;
+            tmp.weight = 0;
+            tmp.parent = -1;
+            tmp.lchild = -1;
+            tmp.rchild = -1;
+            tree.push_back(tmp);
+        }
+        int i=0;
+        for (auto tmp : map)
+        {
+            cout<<"字符："<<tmp.first<<"的权值为："<<tmp.second<<endl;
+            tree[i].sign=tmp.first;
+            tree[i].weight=tmp.second;
+            i++;
+        }
+    }
+    else if (x == 2)
+    {
+        cout << "请输入要编码的字符的个数:" << endl;
+        cin >> n;
+        // 定义Huffman结点，n个字符需要构造哈夫曼树2 * n - 1
+        // 初始化
+        for (int i = 0; i < 2 * n - 1; i++)
+        {
+            HNode tmp;
+            tmp.id = i;
+            tmp.weight = 0;
+            tmp.parent = -1;
+            tmp.lchild = -1;
+            tmp.rchild = -1;
+            tree.push_back(tmp);
+        }
+        cout << "请分别输入" << n << "个字符及其权值(以空格隔开):" << endl;
+        for (int i = 0; i < n; i++)
+        {
+            cin >> tree[i].sign >> tree[i].weight;
+        }
+    }
+    else
+    {
+        cout << "输入错误，退出程序！" << endl;
+        system("pause");
+        return 0;
+    }
     vector<HNode> tree = HuffmanTree(n);
     vector<HCode> codes = HuffmanCode(tree, n);
     PrintHuffmanCode(codes);
     system("pause");
     return 0;
-} 
+}

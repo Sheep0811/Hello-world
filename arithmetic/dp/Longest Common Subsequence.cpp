@@ -8,10 +8,38 @@ void lcs(int i, int j, string a, string &ans, vector<vector<int>> m); //最长�
 int main()
 {
     string a, b;
-    cout << "请输入第一个序列：" << endl;
-    cin >> a;
-    cout << "请输入第二个序列：" << endl;
-    cin >> b;
+    int x;
+    cout<<"请选择输入方式：\n1.从文件LCS.txt中输入\n2.手动输入\n";
+    cin>>x;
+    if(x==1)
+    {
+        ifstream input;
+        input.open("LCS.txt",ios::in);                                            
+        if (!input)
+	    {
+		    cout << "文件不存在" << endl;
+		    cout << "退出程序" << endl;
+            system("pause");
+		    return 0;
+        }
+        input>>a>>b;
+        cout<<"第一个子序列为："<<a<<endl;
+        cout<<"第二个子序列为："<<b;        
+        input.close();
+    }
+    else if(x==2)
+    {
+        cout << "请输入第一个序列：" << endl;
+        cin >> a;
+        cout << "请输入第二个序列：" << endl;
+        cin >> b;   
+    }
+    else
+    {
+        cout<<"输入错误";
+        system("pause");
+        return 0;
+    }
     vector<vector<int>> dp(a.size() + 1, vector<int>(b.size() + 1, 0));
     vector<vector<int>> m(a.size() + 1, vector<int>(b.size() + 1, 0)); //0为左下，1为左，-1为下
     int length = longest(a, b, dp, m);
