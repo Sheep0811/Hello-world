@@ -37,6 +37,8 @@
         "forward_list": "cpp",
         "list": "cpp",
         "numeric": "cpp",
-        "xlocbuf": "cpp"
+        "xlocbuf": "cpp",
+        "xstring": "cpp",
+        "xiosbase": "cpp"
     }, // 格式化时调整include的顺序（按字母排序）
 }
