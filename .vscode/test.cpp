@@ -1,53 +1,35 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-typedef long long ll;
-
+#define N 1000
+ 
 int main()
 {
-	string a,b;
-	cin>>a>>b;
-	int n=a.size(),m=b.size();
-	vector<vector<int>> dp(n+1,vector<int>(m+1,0));
-	for(int i=0;i<n;++i)
-	{
-		for(int j=0;j<m;++j)
-		{
-			if(a[i]==b[j])
-			dp[i+1][j+1]=dp[i][j]+1;
-			else
-			dp[i+1][j+1]=max(dp[i+1][j],dp[i][j+1]);
-		}
-	}
-	for(int i=0;i<=n;++i)
-	{
-		for(int j=0;j<=m;++j)
-		{
-			cout<<dp[i][j]<<" ";
-		}
-		cout<<endl;
-	}
-	int x=n,y=m;
-	string ans;
-	while(dp[x][y]>0)
-	{
-		if(dp[x-1][y]==dp[x][y])
-		{
-			x--;
-			continue;
-		}
-		if(dp[x][y-1]==dp[x][y])
-		{
-			y--;
-			continue;
-		}
-		if(dp[x][y]==dp[x-1][y-1]+1)
-		{
-			ans+=a[x-1];
-			x--;y--;
-		}
-	}
-	reverse(ans.begin(),ans.end());
-	cout<<ans;
-	system("pause");
-	return 0;
+//    freopen("input.txt", "r", stdin);
+    int a, b, t;
+    cin >> a >> b;
+    cout << a / b;
+    a = a % b;
+    if(a == 0) return 0;
+    cout << ".";
+    map<int, int> m;
+    vector<int> vec;
+    t = 0;
+    while(a != 0) {
+        if(m.count(a) != 0) break;
+        vec.push_back(a * 10 / b);
+        m[a] = t++;
+        a = a * 10 % b;
+    }
+    if(a == 0) {
+        for(int i = 0; i < t; i++) cout << vec[i];
+    } else {
+        int k = m[a];
+        for(int i = 0; i < k; i++) cout << vec[i];
+        cout << "(";
+        for(int i = k; i < t; i++) cout << vec[i];
+        cout << ")";
+    }
+    cout << endl;
+    system("pause");
+    return 0;
 }
